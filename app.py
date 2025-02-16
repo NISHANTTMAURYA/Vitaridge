@@ -100,9 +100,35 @@ Format your response in the following structure:
         print(f"[ERROR] Generating analysis: {str(e)}")
         return {"error": "Failed to analyze the medical report"}
 
+# Modify the home route to serve index.html instead of mr.html
 @app.route('/')
 def home():
-    return render_template('mr.html')  # Now serving mr.html instead of text message
+    return render_template('index.html')
+
+# Add new routes for each service
+@app.route('/mr')
+def medical_report():
+    return render_template('mr.html')
+
+@app.route('/pg')
+def prescription_generator():
+    return render_template('pg.html')
+
+@app.route('/chat')
+def chat_page():
+    return render_template('chat.html')
+
+@app.route('/dc')
+def doctor_consult():
+    return render_template('dc.html')
+
+@app.route('/dd')
+def drug_data():
+    return render_template('dd.html')
+
+@app.route('/vr')
+def vaccination_records():
+    return render_template('vr.html')
 
 @app.route('/upload', methods=['POST'])
 def summarize():
@@ -148,6 +174,85 @@ def summarize():
     except Exception as e:
         print(f"🚨 Error processing file: {str(e)}")
         return jsonify({"error": str(e)}), 500
+
+# Add to app.py
+@app.route('/chat', methods=['POST'])
+def chat():
+    try:
+        data = request.json
+        user_message = data.get('message', '')
+
+        system_prompt = """You are an expert medical AI assistant trained to conduct thorough medical conversations.
+
+Your approach should be:
+
+1. Initial Response:
+   - Acknowledge the user's concern
+   - Ask relevant follow-up questions to gather more context
+   - Present questions one at a time to avoid overwhelming the user
+
+2. Question Strategy:
+   - Ask about symptoms duration and severity
+   - Inquire about relevant medical history
+   - Check for related symptoms
+   - Ask about lifestyle factors that may be relevant
+   - Verify if any treatments have been tried
+
+3. Analysis and Response:
+   - Synthesize the information provided
+   - Explain medical terms in simple language
+   - Highlight potential connections between symptoms
+   - Suggest general wellness recommendations
+   - Include relevant preventive measures
+
+4. Safety Protocols:
+   - Clearly state you are not replacing medical professionals
+   - Advise seeking immediate medical attention for serious symptoms
+   - Include appropriate medical disclaimers
+   - Flag emergency situations immediately
+
+5. Communication Style:
+   - Maintain a professional yet empathetic tone
+   - Use clear, simple language
+   - Break down complex medical concepts
+   - Be patient-centric and supportive
+   - Show appropriate concern without causing alarm
+
+Format your responses as:
+1. Brief acknowledgment of the user's input
+2. 1-2 relevant follow-up questions
+3. Helpful information or guidance based on available context
+4. Appropriate medical disclaimer when needed
+
+Remember: Always maintain a conversational flow while gathering necessary medical information."""
+
+        # Call Groq API with conversation context
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": system_prompt
+                },
+                {
+                    "role": "user",
+                    "content": user_message
+                }
+            ],
+            model="mixtral-8x7b-32768",
+            temperature=0.7,
+            max_tokens=1024
+        )
+
+        response = chat_completion.choices[0].message.content
+        return jsonify({"response": response})
+
+    except Exception as e:
+        print(f"[ERROR] Chat processing: {str(e)}")
+        return jsonify({"error": "Failed to process your message"}), 500
+
+@app.route('/chatbot')
+def chatbot():
+    return render_template('chatbot.html')
 
 if __name__ == "__main__":
     app.run(debug=True)

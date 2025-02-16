@@ -17,7 +17,85 @@
         button { background-color: #00509E; color: white; cursor: pointer; }
         button:hover { background-color: #003f7d; }
         .output { margin-top: 20px; background: #f0f8ff; padding: 15px; border-radius: 5px; text-align: left; }
-        footer { background-color: #00509E; color: #fff; text-align: center; padding: 10px 0; margin-top: 20px; }
+        
+        .analysis-container {
+            margin-top: 20px;
+            text-align: left;
+            display: none;
+        }
+        
+        .section {
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .section-title {
+            color: #00509E;
+            font-weight: bold;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .list-item {
+            margin: 5px 0;
+            padding-left: 20px;
+            position: relative;
+        }
+        
+        .list-item:before {
+            content: "•";
+            color: #00509E;
+            position: absolute;
+            left: 0;
+        }
+        
+        .data-pair {
+            display: flex;
+            justify-content: space-between;
+            margin: 5px 0;
+            border-bottom: 1px dotted #eee;
+        }
+        
+        .loading {
+            text-align: center;
+            padding: 20px;
+            display: none;
+        }
+        
+        .loading:after {
+            content: "...";
+            animation: dots 1.5s steps(5, end) infinite;
+        }
+        
+        @keyframes dots {
+            0%, 20% { content: "."; }
+            40% { content: ".."; }
+            60%, 100% { content: "..."; }
+        }
+
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: transparent;
+            color: #00509E;
+            border: 2px solid #00509E;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+            width: auto;
+            transition: all 0.2s ease;
+        }
+
+        .back-button:hover {
+            background: #00509E;
+            color: white;
+        }
     </style>
 </head>
 <body>
@@ -31,8 +109,11 @@
     </header>
 
     <div class="container">
+        <button class="back-button" onclick="location.href='/'">
+            ← Back to Home
+        </button>
         <h1>Medical Report Analysis</h1>
-        <p>Upload your medical report to receive a summarized analysis.</p>
+        <p>Upload your medical report to receive a detailed analysis.</p>
         <form id="reportForm" method="POST" enctype="multipart/form-data" action="/upload">
 
             <label for="reportFile">Select Medical Report:</label>
@@ -50,12 +131,40 @@
             <button type="submit">Analyze Report</button>
         </form>
 
-        <div id="output" class="output" style="display: none;"></div>
-    </div>
+        <div id="loading" class="loading">Analyzing your medical report</div>
 
-    <footer>
-        &copy; 2024 Vital Ridge. All Rights Reserved.
-    </footer>
+        <div id="analysis" class="analysis-container">
+            <div class="section">
+                <div class="section-title">Key Findings</div>
+                <div id="keyFindings"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Vital Signs</div>
+                <div id="vitalSigns"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Lab Results</div>
+                <div id="labResults"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Concerns</div>
+                <div id="concerns"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Summary</div>
+                <div id="summary"></div>
+            </div>
+
+            <div class="section">
+                <div class="section-title">Recommendations</div>
+                <div id="recommendations"></div>
+            </div>
+        </div>
+    </div>
 
     <script>
         document.getElementById("reportForm").onsubmit = async function(event) {
@@ -63,7 +172,8 @@
 
             const fileInput = document.getElementById('reportFile');
             const languageSelect = document.getElementById('language');
-            const outputDiv = document.getElementById('output');
+            const loadingDiv = document.getElementById('loading');
+            const analysisDiv = document.getElementById('analysis');
 
             if (!fileInput.files.length) {
                 alert("Please upload a medical report file!");
@@ -74,11 +184,11 @@
             formData.append("reportFile", fileInput.files[0]);
             formData.append("language", languageSelect.value);
 
-            outputDiv.innerHTML = "<p>Processing your medical report...</p>";
-            outputDiv.style.display = "block";
+            loadingDiv.style.display = "block";
+            analysisDiv.style.display = "none";
 
             try {
-                const response = await fetch("/upload", {  // <-- FIXED ENDPOINT
+                const response = await fetch("/upload", {
                     method: "POST",
                     body: formData
                 });
@@ -86,12 +196,55 @@
                 const result = await response.json();
 
                 if (response.ok) {
-                    outputDiv.innerHTML = `<h3>Summary in ${getLanguageName(languageSelect.value)}:</h3><p>${result.summary}</p>`;
+                    // Populate key findings
+                    const keyFindingsHtml = result.key_findings
+                        .map(finding => `<div class="list-item">${finding}</div>`)
+                        .join('');
+                    document.getElementById('keyFindings').innerHTML = keyFindingsHtml;
+
+                    // Populate vital signs
+                    const vitalSignsHtml = Object.entries(result.vital_signs)
+                        .map(([key, value]) => `
+                            <div class="data-pair">
+                                <span>${key}:</span>
+                                <span>${value}</span>
+                            </div>`)
+                        .join('');
+                    document.getElementById('vitalSigns').innerHTML = vitalSignsHtml;
+
+                    // Populate lab results
+                    const labResultsHtml = Object.entries(result.lab_results)
+                        .map(([key, value]) => `
+                            <div class="data-pair">
+                                <span>${key}:</span>
+                                <span>${value}</span>
+                            </div>`)
+                        .join('');
+                    document.getElementById('labResults').innerHTML = labResultsHtml;
+
+                    // Populate concerns
+                    const concernsHtml = result.concerns
+                        .map(concern => `<div class="list-item">${concern}</div>`)
+                        .join('');
+                    document.getElementById('concerns').innerHTML = concernsHtml;
+
+                    // Populate summary
+                    document.getElementById('summary').innerHTML = `<p>${result.summary}</p>`;
+
+                    // Populate recommendations
+                    const recommendationsHtml = result.recommendations
+                        .map(rec => `<div class="list-item">${rec}</div>`)
+                        .join('');
+                    document.getElementById('recommendations').innerHTML = recommendationsHtml;
+
+                    analysisDiv.style.display = "block";
                 } else {
-                    outputDiv.innerHTML = `<p style="color: red;">Error: ${result.error}</p>`;
+                    alert(`Error: ${result.error}`);
                 }
             } catch (error) {
-                outputDiv.innerHTML = `<p style="color: red;">Failed to process the file. Please try again.</p>`;
+                alert('Failed to process the file. Please try again.');
+            } finally {
+                loadingDiv.style.display = "none";
             }
         };
 
