@@ -121,19 +121,14 @@
 
 <body>
     <header>
-        <a href="/"><img src="logo.png" alt="Vital Ridge Logo" style="height: 50px;"></a>
-        <nav>
-            <a href="#solutions">Solutions</a>
-            <a href="#about">About</a>
-            <a href="/contact">Contact</a>
-        </nav>
+        <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vital Ridge Logo" style="height: 50px;"></a>
     </header>
 
     <section class="hero">
         <h2>One Stop Solution for all your Medical Needs</h2>
         <p>Transforming Healthcare, Improving Lives</p>
        
-        <img src="image.png" height="300px" width="300px" alt="Healthcare Illustration">
+        <img src="{{ url_for('static', filename='images/image.png') }}" height="300px" width="300px" alt="Healthcare Illustration">
     </section>
 
     <section class="services">

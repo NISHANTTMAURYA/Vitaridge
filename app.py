@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify, render_template, send_from_directory
+from flask import Flask, request, jsonify, render_template, send_from_directory, url_for
 import os
 import PyPDF2
 import pytesseract
@@ -8,7 +8,13 @@ from transformers import pipeline
 from groq import Groq
 import json
 
-app = Flask(__name__)
+app = Flask(__name__, static_url_path='/static')
+app.static_folder = 'static'
+
+# Add this route to serve static files
+@app.route('/static/<path:filename>')
+def serve_static(filename):
+    return send_from_directory(app.static_folder, filename)
 
 # Define the upload folder
 UPLOAD_FOLDER = "uploads"
