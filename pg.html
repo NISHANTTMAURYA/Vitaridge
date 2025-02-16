@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Prescription Generator</title>
+<style>
+    body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+        color: #333;
+    }
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background-color: #00509E;
+        color: #fff;
+        padding: 10px 20px;
+    }
+    header h1 {
+        font-size: 1.5em;
+        margin: 0;
+    }
+    header nav a {
+        color: #fff;
+        text-decoration: none;
+        margin: 0 15px;
+        font-size: 1em;
+    }
+    header nav a:hover {
+        text-decoration: underline;
+    }
+    .container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        margin: 20px;
+        padding: 20px;
+        background-color: #f9f9f9;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+    .section {
+        width: 45%;
+        margin: 10px;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+    .section h2 {
+        color: #00509E;
+        margin-bottom: 15px;
+    }
+    .form-group {
+        margin-bottom: 15px;
+    }
+    .form-group label {
+        display: block;
+        font-weight: bold;
+        margin-bottom: 5px;
+    }
+    .form-group input, 
+    .form-group select, 
+    .form-group textarea {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+    }
+    .btn {
+        display: inline-block;
+        background-color: #00509E;
+        color: #fff;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .btn:hover {
+        background-color: #003f7d;
+    }
+    footer {
+        background-color: #00509E;
+        color: #fff;
+        text-align: center;
+        padding: 10px 0;
+    }
+</style>
+</head>
+<body>
+<header>
+    <a href="index.html"><img src="logo.png" alt="Vital Ridge Logo" style="height: 50px;"></a>
+    <nav>
+        <a href="#solutions">Solutions</a>
+        <a href="#about">About</a>
+        <a href="contactus.html">Contact</a>
+    </nav>
+</header>
+
+<div class="container">
+    <div class="section">
+        <h2>Patient Info</h2>
+        <div class="form-group">
+            <label for="patientType">Patient Type</label>
+            <select id="patientType">
+                <option>New</option>
+                <option>Old</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="mobile">Mobile</label>
+            <input type="text" id="mobile" placeholder="Mobile Number">
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" id="name" placeholder="Patient Name">
+        </div>
+        <div class="form-group">
+            <label for="gender">Gender</label>
+            <select id="gender">
+                <option>Male</option>
+                <option>Female</option>
+                <option>Other</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="age">Age</label>
+            <input type="number" id="age" placeholder="Patient Age">
+        </div>
+        
+        <button class="btn">Diagnosis Test</button>
+        <button class="btn">Drug/Medicine</button>
+    </div>
+
+    <div class="section">
+        <h2>Prescription Info</h2>
+        <div class="form-group">
+            <label for="id">ID</label>
+            <input type="text" id="id" placeholder="Prescription ID">
+        </div>
+        <div class="form-group">
+            <label for="date">Date</label>
+            <input type="date" id="date">
+        </div>
+        <div class="form-group">
+            <label for="visit">Visit No</label>
+            <input type="number" id="visit" placeholder="Visit Number">
+        </div>
+        <div class="form-group">
+            <label for="problems">Patient Problems / Symptoms</label>
+            <textarea id="problems" rows="4" placeholder="Symptoms description"></textarea>
+        </div>
+        <div class="form-group">
+            <label for="medicine">Medicine</label>
+            <input type="text" id="medicine" placeholder="Select Medicine">
+        </div>
+        <div class="form-group">
+            <label for="test">Test</label>
+            <input type="text" id="test" placeholder="Select Diagnosis Test">
+        </div>
+    </div>
+</div>
+
+        
+    
+    <footer>
+        &copy; 2024 Vital Ridge. All Rights Reserved.
+    </footer>
+</body>
+
+</html>

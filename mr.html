@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Medical Report Analysis - Vital Ridge</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+            background-color: #f9f9f9;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #00509E;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        header img {
+            height: 50px;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1em;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        label {
+            display: block;
+            margin: 15px 0 5px;
+            font-weight: bold;
+        }
+
+        input[type="file"] {
+            margin: 10px 0;
+        }
+
+        select, button {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            width: 100%;
+            font-size: 1em;
+        }
+
+        button {
+            background-color: #00509E;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #003f7d;
+        }
+
+        .output {
+            margin-top: 20px;
+            background: #f0f8ff;
+            padding: 15px;
+            border-radius: 5px;
+            text-align: left;
+        }
+
+        footer {
+            background-color: #00509E;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="index.html"><img src="logo.png" alt="Vital Ridge Logo"></a>
+        <nav>
+            <a href="#solutions">Solutions</a>
+            <a href="#about">About</a>
+            <a href="contactus.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="container">
+        <h1>Medical Report Analysis</h1>
+        <p>Upload your medical report to receive a summarized analysis. Choose your preferred language for the output.</p>
+        <form id="reportForm" method="POST" enctype="multipart/form-data" action="/summarize">
+            <label for="reportFile">Select Medical Report:</label>
+            <input type="file" id="reportFile" name="reportFile" accept=".txt,.pdf,.docx" required>
+        
+            <label for="language">Select Language:</label>
+            <select id="language" name="language">
+                <option value="en">English</option>
+                <option value="es">Spanish</option>
+                <option value="fr">French</option>
+                <option value="de">German</option>
+                <option value="hi">Hindi</option>
+            </select>
+        
+            <button type="submit">Analyze Report</button>
+        </form>
+        
+        <div id="output" class="output" style="display: none;"></div>
+        
+    </div>
+
+    <footer>
+        &copy; 2024 Vital Ridge. All Rights Reserved.
+    </footer>
+
+    <script>
+        function analyzeReport() {
+            const fileInput = document.getElementById('reportFile');
+            const languageSelect = document.getElementById('language');
+            const outputDiv = document.getElementById('output');
+
+            if (!fileInput.files.length) {
+                alert("Please upload a medical report file!");
+                return;
+            }
+
+            const file = fileInput.files[0];
+            const language = languageSelect.value;
+
+            // Mock summary and translation logic
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                const content = event.target.result;
+                const summary = generateMockSummary(content);
+                const translatedSummary = translateMockSummary(summary, language);
+
+                outputDiv.innerHTML = `<h3>Summary in ${getLanguageName(language)}:</h3><p>${translatedSummary}</p>`;
+                outputDiv.style.display = "block";
+            };
+            reader.readAsText(file);
+        }
+
+        // Simulated summary generation
+        function generateMockSummary(content) {
+            return "This is a simulated summary of the uploaded medical report.";
+        }
+
+        // Simulated translation
+        function translateMockSummary(summary, language) {
+            const translations = {
+                en: summary,
+                es: "Este es un resumen simulado del informe médico cargado.",
+                fr: "Ceci est un résumé simulé du rapport médical téléchargé.",
+                de: "Dies ist eine simulierte Zusammenfassung des hochgeladenen medizinischen Berichts.",
+                hi: "यह अपलोड की गई चिकित्सा रिपोर्ट का एक सिम्युलेटेड सारांश है।"
+            };
+            return translations[language] || summary;
+        }
+
+        // Helper function to get language name
+        function getLanguageName(code) {
+            const names = {
+                en: "English",
+                es: "Spanish",
+                fr: "French",
+                de: "German",
+                hi: "Hindi"
+            };
+            return names[code] || "Selected Language";
+        }
+    </script>
+</body>
+
+</html>

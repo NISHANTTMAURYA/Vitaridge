@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #00509E;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        header h1 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1em;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #f0f8ff, #e6f7ff);
+        }
+
+        .hero h2 {
+            font-size: 2.5em;
+            color: #00509E;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .chat-section {
+            padding: 40px 20px;
+            background-color: #f9f9f9;
+        }
+
+        .chat-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+        }
+
+        .chat-container h2 {
+            color: #00509E;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .chat-box {
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px;
+            max-height: 300px;
+            overflow-y: auto;
+            margin-bottom: 10px;
+        }
+
+        .chat-message {
+            margin: 10px 0;
+        }
+
+        .chat-message.user {
+            text-align: right;
+            color: #00509E;
+        }
+
+        .chat-message.bot {
+            text-align: left;
+            color: #333;
+        }
+
+        .chat-input {
+            display: flex;
+            gap: 10px;
+        }
+
+        .chat-input input {
+            flex-grow: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1em;
+        }
+
+        .chat-input button {
+            background-color: #00509E;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .chat-input button:hover {
+            background-color: #003f7d;
+        }
+
+        footer {
+            background-color: #00509E;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="index.html">
+            <img src="logo.png" alt="Vital Ridge Logo" style="height: 50px;">
+        </a>
+        <nav>
+            <a href="#solutions">Solutions</a>
+            <a href="#about">About</a>
+            <a href="contactus.html">Contact </a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Welcome to Vital Ridge</h2>
+        <p>Your trusted partner for health-related solutions.</p>
+    </section>
+
+    <section class="chat-section">
+        <div class="chat-container">
+            <h2>Chat with MI</h2>
+            <div class="chat-box" id="chatBox"></div>
+            <div class="chat-input">
+                <input type="text" id="userInput" placeholder="Ask your health-related query...">
+                <button onclick="sendMessage()">Send</button>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        &copy; 2024 Vital Ridge. All Rights Reserved.
+    </footer>
+
+    <script>
+        function sendMessage() {
+            const userInput = document.getElementById('userInput');
+            const chatBox = document.getElementById('chatBox');
+
+            if (userInput.value.trim() === '') return;
+
+            // Append user message
+            const userMessage = document.createElement('div');
+            userMessage.className = 'chat-message user';
+            userMessage.textContent = userInput.value;
+            chatBox.appendChild(userMessage);
+
+            // Scroll to the bottom of the chat
+            chatBox.scrollTop = chatBox.scrollHeight;
+
+            // Simulate bot response
+            const botMessage = document.createElement('div');
+            botMessage.className = 'chat-message bot';
+            botMessage.textContent = `Let me help you with: "${userInput.value}"`;
+
+            setTimeout(() => {
+                chatBox.appendChild(botMessage);
+                chatBox.scrollTop = chatBox.scrollHeight;
+            }, 1000);
+
+            // Clear input
+            userInput.value = '';
+        }
+    </script>
+</body>
+
+</html>

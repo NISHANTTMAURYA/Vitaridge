@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vital Ridge - AI Healthcare Platform</title>
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #333;
+        }
+
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #00509E;
+            color: #fff;
+            padding: 10px 20px;
+        }
+
+        header h1 {
+            font-size: 1.5em;
+            margin: 0;
+        }
+
+        header nav a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 1em;
+        }
+
+        header nav a:hover {
+            text-decoration: underline;
+        }
+
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(to bottom, #f0f8ff, #e6f7ff);
+        }
+
+        .hero h2 {
+            font-size: 2.5em;
+            color: #00509E;
+            margin-bottom: 10px;
+        }
+
+        .hero p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .hero button {
+            background-color: #00509E;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .hero button:hover {
+            background-color: #003f7d;
+        }
+
+        .services {
+            padding: 40px 20px;
+            background-color: #f9f9f9;
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 2em;
+            color: #00509E;
+            margin-bottom: 20px;
+        }
+
+        .services .cards {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .services .card {
+            background-color: #fff;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            width: 300px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .services .card h3 {
+            font-size: 1.5em;
+            color: #00509E;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            background-color: #00509E;
+            color: #fff;
+            text-align: center;
+            padding: 10px 0;
+        }
+
+        .hero img {
+            width: 100%;
+            max-width: 800px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .vaccination-records {
+            padding: 40px 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .vaccination-records h2 {
+            font-size: 2em;
+            color: #00509E;
+            margin-bottom: 20px;
+        }
+
+        .vaccination-records table {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            border-collapse: collapse;
+            text-align: left;
+        }
+
+        .vaccination-records th, .vaccination-records td {
+            border: 1px solid #ddd;
+            padding: 10px;
+        }
+
+        .vaccination-records th {
+            background-color: #00509E;
+            color: #fff;
+        }
+
+        .vaccination-records tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <a href="index.html">
+            <img src="logo.png" alt="Vital Ridge Logo" style="height: 50px;">
+        </a>
+        <nav>
+            <a href="#solutions">Solutions</a>
+            <a href="#about">About</a>
+            <a href="contactus.html">Contact</a>
+        </nav>
+    </header>
+
+    <section class="hero">
+        <h2>Welcome to Vital Ridge</h2>
+        <p>Your trusted AI healthcare platform.</p>
+        <button>Get Started</button>
+    </section>
+
+    <section class="vaccination-records">
+        <h2>Your Vaccination Records</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Vaccine</th>
+                    <th>Date Administered</th>
+                    <th>Healthcare Provider</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>COVID-19 Vaccine</td>
+                    <td>2024-01-15</td>
+                    <td>City Health Clinic</td>
+                    <td>First dose</td>
+                </tr>
+                <tr>
+                    <td>Influenza</td>
+                    <td>2023-10-10</td>
+                    <td>Downtown Hospital</td>
+                    <td>Annual flu shot</td>
+                </tr>
+                <!-- Additional records can be added here -->
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        &copy; 2024 Vital Ridge. All Rights Reserved.
+    </footer>
+</body>
+
+</html>

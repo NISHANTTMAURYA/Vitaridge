@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #00509E;
+      color: #fff;
+      padding: 10px 20px;
+    }
+
+    header h1 {
+      font-size: 1.5em;
+           margin: 0;
+    }
+
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1em;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    footer {
+      background-color: #00509E;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+
+    .consult-section {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #fff;
+      padding: 20px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 800px;
+      margin: 50px auto;
+      border-radius: 10px;
+    }
+
+    .consult-form {
+      flex: 1;
+      padding-right: 20px;
+    }
+
+    .consult-form h2 {
+      font-size: 1.8em;
+      color: #333;
+      margin-bottom: 20px;
+    }
+
+    .consult-form label {
+      display: block;
+      font-size: 1em;
+      margin-bottom: 5px;
+      color: #555;
+    }
+
+    .consult-form input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      font-size: 1em;
+    }
+
+    .consult-form input:focus {
+      border-color: #00509E;
+      outline: none;
+    }
+
+    .consult-form .btn {
+      display: block;
+      width: 100%;
+      background-color: #00509E;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .consult-form .btn:hover {
+      background-color: #003f7d;
+    }
+
+    .follow-up {
+      flex: 0.4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+
+    .follow-up img {
+      width: 80px;
+      height: 80px;
+      margin-bottom: 10px;
+    }
+
+    .follow-up span {
+      font-size: 1em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="logo.png" alt="Vital Ridge Logo" style="height: 50px;">
+    </a>
+    <nav>
+      <a href="#solutions">Solutions</a>
+      <a href="#about">About</a>
+      <a href="contactus.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="consult-section">
+    <div class="consult-form">
+      <h2>Consult with a Doctor</h2>
+      <label for="symptom">Tell us your symptom or health problem</label>
+      <input type="text" id="symptom" placeholder="Eg: fever, headache" minlength="4" required>
+      <label for="mobile">Mobile number</label>
+      <input type="tel" id="mobile" placeholder="Enter mobile number" required>
+      <button class="btn">Continue</button>
+    </div>
+    <div class="follow-up">
+      <img src="followup.jpg" alt="Free Follow-up Icon">
+      <span>Free Follow-up</span>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2024 Vital Ridge. All Rights Reserved.
+  </footer>
+</body>
+</html>

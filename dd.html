@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #00509E;
+      color: #fff;
+      padding: 10px 20px;
+    }
+
+    header h1 {
+      font-size: 1.5em;
+      margin: 0;
+    }
+
+    header nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 15px;
+      font-size: 1em;
+    }
+
+    header nav a:hover {
+      text-decoration: underline;
+    }
+
+    .drug-analysis {
+      display: flex;
+      justify-content: space-between;
+      padding: 40px;
+      background-color: #f9f9f9;
+      max-width: 1200px;
+      margin: 40px auto;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .upload-section {
+      flex: 1;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      margin-right: 20px;
+    }
+
+    .upload-section h3 {
+      font-size: 1.2em;
+      color: #00509E;
+      margin-bottom: 20px;
+    }
+
+    .upload-button {
+      display: block;
+      width: 100%;
+      background-color: #00509E;
+      color: #fff;
+      border: none;
+      padding: 10px;
+      font-size: 1em;
+      border-radius: 5px;
+      text-align: center;
+      cursor: pointer;
+      margin-bottom: 15px;
+    }
+
+    .upload-button:hover {
+      background-color: #003f7d;
+    }
+
+    .upload-section .info {
+      font-size: 0.9em;
+      color: #666;
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    .details-section {
+      flex: 1;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .details-section h3 {
+      font-size: 1.2em;
+      color: #00509E;
+      margin-bottom: 20px;
+    }
+
+    .details-section .details-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 15px;
+    }
+
+    .details-section .details-grid div {
+      text-align: center;
+    }
+
+    .details-section .details-grid img {
+      width: 50px;
+      height: 50px;
+      margin-bottom: 5px;
+    }
+
+    footer {
+      background-color: #00509E;
+      color: #fff;
+      text-align: center;
+      padding: 10px 0;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <a href="index.html"><img src="logo.png" alt="Vital Ridge Logo" style="height: 50px;">
+    </a>
+    <nav>
+      <a href="#solutions">Solutions</a>
+      <a href="#about">About</a>
+      <a href="contactus.html">Contact</a>
+    </nav>
+  </header>
+
+  <section class="drug-analysis">
+    <div class="upload-section">
+      <h3>Choose from the following to upload a prescription:</h3>
+      <button class="upload-button">CHOOSE FROM GALLERY</button>
+      <p style="text-align: center; margin: 10px 0;">OR</p>
+      <button class="upload-button">SELECT FROM E-PRESCRIPTION</button>
+      <div class="info">Uploaded prescriptions will be shown here</div>
+    </div>
+
+    <div class="details-section">
+      <h3>Make sure the prescription you upload contains the following elements:</h3>
+      <div class="details-grid">
+        <div>
+          <img src="doct1.svg" alt="Doctor Details">
+          <p>Doctor Details</p>
+        </div>
+        <div>
+          <img src="doct2.svg" alt="Date of Prescription">
+          <p>Date of Prescription</p>
+        </div>
+        <div>
+          <img src="patient.svg" alt="Patient Details">
+          <p>Patient Details</p>
+        </div>
+        <div>
+          <img src="med.svg" alt="Medicine Details">
+          <p>Medicine Details</p>
+        </div>
+        
+      </div>
+      <p style="font-size: 0.9em; color: #666; margin-top: 20px;">
+        Our pharmacist will dispense medicines only if the prescription is valid & meets all government regulations.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2024 Vital Ridge. All Rights Reserved.
+  </footer>
+</body>
+</html>
