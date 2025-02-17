@@ -4,4 +4,10 @@ PyPDF2==3.0.1
 groq==0.18.0
 requests==2.31.0
 gunicorn==21.2.0
-python-dotenv==1.0.0 
+python-dotenv==1.0.0
+pytesseract==0.3.10
+Pillow==9.3.0
+transformers==4.30.2
+torch==2.0.1
+torchaudio==2.0.1
+torchvision==0.15.2 
