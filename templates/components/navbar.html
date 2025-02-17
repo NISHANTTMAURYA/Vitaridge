@@ -1,0 +1,203 @@
+<header>
+    <div class="mobile-nav">
+        <button class="menu-toggle" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <a href="/" class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vital Ridge Logo">
+        </a>
+    </div>
+
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vital Ridge Logo">
+            <button class="close-sidebar" onclick="toggleSidebar()">×</button>
+        </div>
+        <nav>
+            <a href="/mr">Medical Report</a>
+            <a href="/pg">Prescription</a>
+            <a href="/dc">Consultation</a>
+            <a href="/dd">Drug Data</a>
+            <a href="/vr">Vaccination</a>
+            <a href="/chatbot">AI Assistant</a>
+        </nav>
+    </div>
+
+    <div class="desktop-header">
+        <a href="/" class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vital Ridge Logo">
+        </a>
+        <nav class="desktop-nav">
+            <a href="/mr">Medical Report</a>
+            <a href="/pg">Prescription</a>
+            <a href="/dc">Consultation</a>
+            <a href="/dd">Drug Data</a>
+            <a href="/vr">Vaccination</a>
+            <a href="/chatbot">AI Assistant</a>
+        </nav>
+    </div>
+</header>
+
+<div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+<style>
+    header {
+        background-color: #00509E;
+        color: #fff;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    }
+
+    .desktop-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 10px 20px;
+    }
+
+    .logo img {
+        height: 50px;
+        transition: transform 0.2s ease;
+    }
+
+    .logo:hover img {
+        transform: scale(1.05);
+    }
+
+    .desktop-nav {
+        display: flex;
+        gap: 20px;
+    }
+
+    .desktop-nav a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1em;
+        padding: 5px 10px;
+        border-radius: 15px;
+        transition: all 0.2s ease;
+    }
+
+    .desktop-nav a:hover {
+        background: rgba(255,255,255,0.1);
+        transform: translateY(-2px);
+    }
+
+    /* Mobile Styles */
+    .mobile-nav {
+        display: none;
+        align-items: center;
+        padding: 10px;
+    }
+
+    .menu-toggle {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        width: 30px;
+        height: 21px;
+        background: transparent;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        margin-right: 15px;
+    }
+
+    .menu-toggle span {
+        width: 100%;
+        height: 3px;
+        background-color: white;
+        border-radius: 3px;
+        transition: all 0.3s ease;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: -280px;
+        height: 100vh;
+        width: 280px;
+        background: white;
+        box-shadow: 2px 0 8px rgba(0,0,0,0.1);
+        transition: left 0.3s ease;
+        z-index: 1000;
+    }
+
+    .sidebar.active {
+        left: 0;
+    }
+
+    .sidebar-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px;
+        background: #00509E;
+    }
+
+    .sidebar-header img {
+        height: 40px;
+    }
+
+    .close-sidebar {
+        background: none;
+        border: none;
+        color: white;
+        font-size: 24px;
+        cursor: pointer;
+    }
+
+    .sidebar nav {
+        display: flex;
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .sidebar nav a {
+        color: #333;
+        text-decoration: none;
+        padding: 15px;
+        border-radius: 8px;
+        transition: background 0.2s ease;
+    }
+
+    .sidebar nav a:hover {
+        background: #f0f0f0;
+    }
+
+    .sidebar-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.5);
+        display: none;
+        z-index: 999;
+    }
+
+    .sidebar-overlay.active {
+        display: block;
+    }
+
+    @media screen and (max-width: 768px) {
+        .desktop-header {
+            display: none;
+        }
+
+        .mobile-nav {
+            display: flex;
+            width: 100%;
+        }
+    }
+</style>
+
+<script>
+    function toggleSidebar() {
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('sidebar-overlay');
+        sidebar.classList.toggle('active');
+        overlay.classList.toggle('active');
+    }
+</script> 

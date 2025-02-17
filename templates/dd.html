@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Drug Data Analysis</title>
   <style>
     body {
       margin: 0;
@@ -122,18 +123,99 @@
       text-align: center;
       padding: 10px 0;
     }
+    .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: #00509E;
+    border: 2px solid #00509E;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin: 20px 0;
+    width: auto;
+    transition: all 0.2s ease;
+}
+
+.back-button:hover {
+    background: #00509E;
+    color: white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+    /* Add these responsive styles at the end */
+    @media screen and (max-width: 768px) {
+        header {
+            flex-direction: column;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .container {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .back-button {
+            margin: 10px;
+            width: calc(100% - 20px);
+            justify-content: center;
+        }
+
+        .drug-analysis {
+            flex-direction: column;
+            padding: 20px;
+            margin: 20px 10px;
+        }
+
+        .upload-section {
+            margin-right: 0;
+            margin-bottom: 20px;
+            width: calc(100% - 40px);
+        }
+
+        .details-section {
+            width: calc(100% - 40px);
+        }
+
+        .details-grid {
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+
+        .upload-button {
+            width: calc(100% - 20px);
+            margin: 10px;
+        }
+
+        .details-section h3,
+        .upload-section h3 {
+            font-size: 1.1em;
+            text-align: center;
+        }
+    }
   </style>
 </head>
 <body>
-  <header>
-    <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vital Ridge Logo" style="height: 50px;">
-    </a>
-    <nav>
-        <a href="#solutions">Solutions</a>
-        <a href="#about">About</a>
-        <a href="contactus.html">Contact</a>
-    </nav>
-</header>
+  {% include 'components/navbar.html' %}
+
+  <div class="container">
+    <button class="back-button" onclick="location.href='/'">
+        ← Back to Home
+    </button>
+  </div>
 
   <section class="drug-analysis">
     <div class="upload-section">

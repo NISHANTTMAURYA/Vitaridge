@@ -6,11 +6,9 @@
     <title>Medical Report Analysis - Vital Ridge</title>
     <style>
         body { margin: 0; font-family: Arial, sans-serif; color: #333; background-color: #f9f9f9; }
-        header { display: flex; justify-content: space-between; align-items: center; background-color: #00509E; color: #fff; padding: 10px 20px; }
-        header img { height: 50px; }
-        header nav a { color: #fff; text-decoration: none; margin: 0 15px; font-size: 1em; }
-        header nav a:hover { text-decoration: underline; }
-        .container { max-width: 600px; margin: 50px auto; padding: 20px; background: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; text-align: center; }
+        
+       
+        .container { max-width: 600px; margin: 20px auto; padding: 20px; background: #fff; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); border-radius: 8px; text-align: center; }
         label { display: block; margin: 15px 0 5px; font-weight: bold; }
         input[type="file"] { margin: 10px 0; }
         select, button { padding: 10px; margin: 10px 0; border: 1px solid #ddd; border-radius: 5px; width: 100%; font-size: 1em; }
@@ -99,10 +97,7 @@
     </style>
 </head>
 <body>
-    <header>
-        <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vital Ridge Logo"></a>
-    </header>
-
+    {% include 'components/navbar.html' %}
     <div class="container">
         <button class="back-button" onclick="location.href='/'">
             ← Back to Home

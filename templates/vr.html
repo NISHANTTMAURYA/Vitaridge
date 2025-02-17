@@ -150,20 +150,104 @@
         .vaccination-records tr:nth-child(even) {
             background-color: #f9f9f9;
         }
+        .back-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    color: #00509E;
+    border: 2px solid #00509E;
+    padding: 8px 16px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9em;
+    margin: 20px 0;
+    width: auto;
+    transition: all 0.2s ease;
+}
+
+.back-button:hover {
+    background: #00509E;
+    color: white;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+        /* Add these responsive styles at the end */
+        @media screen and (max-width: 768px) {
+            header {
+                flex-direction: column;
+                padding: 10px;
+                gap: 10px;
+            }
+
+            header nav {
+                display: flex;
+                gap: 15px;
+            }
+
+            .container {
+                padding: 10px;
+                margin: 10px;
+            }
+
+            .back-button {
+                margin: 10px;
+                width: calc(100% - 20px);
+                justify-content: center;
+            }
+
+            .hero {
+                padding: 30px 10px;
+            }
+
+            .hero h2 {
+                font-size: 1.8em;
+            }
+
+            .hero p {
+                font-size: 1em;
+                padding: 0 10px;
+            }
+
+            .hero button {
+                width: calc(100% - 40px);
+                margin: 10px 20px;
+            }
+
+            .vaccination-records {
+                padding: 20px 10px;
+            }
+
+            .vaccination-records table {
+                display: block;
+                overflow-x: auto;
+                white-space: nowrap;
+                -webkit-overflow-scrolling: touch;
+                width: 100%;
+            }
+
+            .vaccination-records th,
+            .vaccination-records td {
+                padding: 8px;
+                font-size: 0.9em;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <header>
-        <a href="/">
-            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vital Ridge Logo" style="height: 50px;">
-        </a>
-        <nav>
-            <a href="#solutions">Solutions</a>
-            <a href="#about">About</a>
-            <a href="contactus.html">Contact</a>
-        </nav>
-    </header>
+    {% include 'components/navbar.html' %}
+
+    <div class="container">
+        <button class="back-button" onclick="location.href='/'">
+            ← Back to Home
+        </button>
+    </div>
 
     <section class="hero">
         <h2>Welcome to Vital Ridge</h2>

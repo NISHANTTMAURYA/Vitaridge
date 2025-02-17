@@ -87,87 +87,146 @@
         text-align: center;
         padding: 10px 0;
     }
+    @media screen and (max-width: 768px) {
+        header {
+            flex-direction: column;
+            padding: 10px;
+            gap: 10px;
+        }
+
+        header nav {
+            display: flex;
+            gap: 15px;
+        }
+
+        .container {
+            padding: 10px;
+            margin: 10px;
+        }
+
+        .section {
+            width: 100%;
+            margin: 10px 0;
+        }
+
+        .back-button {
+            margin: 10px;
+            width: calc(100% - 20px);
+            justify-content: center;
+        }
+
+        .btn {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .form-group input, 
+        .form-group select, 
+        .form-group textarea {
+            width: calc(100% - 16px);
+        }
+    }
+    .back-button {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        background: transparent;
+        color: #00509E;
+        border: 2px solid #00509E;
+        padding: 8px 16px;
+        border-radius: 20px;
+        cursor: pointer;
+        font-size: 0.9em;
+        margin: 20px;
+        width: auto;
+        transition: all 0.2s ease;
+    }
+
+    .back-button:hover {
+        background: #00509E;
+        color: white;
+    }
+
+    @media screen and (max-width: 768px) {
+        .back-button {
+            margin: 10px;
+        }
+    }
 </style>
 </head>
 <body>
-<header>
-    <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vital Ridge Logo" style="height: 50px;"></a>
-    <nav>
-        <a href="#solutions">Solutions</a>
-        <a href="#about">About</a>
-        <a href="contactus.html">Contact</a>
-    </nav>
-</header>
+    {% include 'components/navbar.html' %}
 
-<div class="container">
-    <div class="section">
-        <h2>Patient Info</h2>
-        <div class="form-group">
-            <label for="patientType">Patient Type</label>
-            <select id="patientType">
-                <option>New</option>
-                <option>Old</option>
-            </select>
+    <button class="back-button" onclick="location.href='/'">
+        ← Back to Home
+    </button>
+
+    <div class="container">
+        <div class="section">
+            <h2>Patient Info</h2>
+            <div class="form-group">
+                <label for="patientType">Patient Type</label>
+                <select id="patientType">
+                    <option>New</option>
+                    <option>Old</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile</label>
+                <input type="text" id="mobile" placeholder="Mobile Number">
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" id="name" placeholder="Patient Name">
+            </div>
+            <div class="form-group">
+                <label for="gender">Gender</label>
+                <select id="gender">
+                    <option>Male</option>
+                    <option>Female</option>
+                    <option>Other</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" placeholder="Patient Age">
+            </div>
+            
+            <button class="btn">Diagnosis Test</button>
+            <button class="btn">Drug/Medicine</button>
         </div>
-        <div class="form-group">
-            <label for="mobile">Mobile</label>
-            <input type="text" id="mobile" placeholder="Mobile Number">
+
+        <div class="section">
+            <h2>Prescription Info</h2>
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input type="text" id="id" placeholder="Prescription ID">
+            </div>
+            <div class="form-group">
+                <label for="date">Date</label>
+                <input type="date" id="date">
+            </div>
+            <div class="form-group">
+                <label for="visit">Visit No</label>
+                <input type="number" id="visit" placeholder="Visit Number">
+            </div>
+            <div class="form-group">
+                <label for="problems">Patient Problems / Symptoms</label>
+                <textarea id="problems" rows="4" placeholder="Symptoms description"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="medicine">Medicine</label>
+                <input type="text" id="medicine" placeholder="Select Medicine">
+            </div>
+            <div class="form-group">
+                <label for="test">Test</label>
+                <input type="text" id="test" placeholder="Select Diagnosis Test">
+            </div>
         </div>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" id="name" placeholder="Patient Name">
-        </div>
-        <div class="form-group">
-            <label for="gender">Gender</label>
-            <select id="gender">
-                <option>Male</option>
-                <option>Female</option>
-                <option>Other</option>
-            </select>
-        </div>
-        <div class="form-group">
-            <label for="age">Age</label>
-            <input type="number" id="age" placeholder="Patient Age">
-        </div>
-        
-        <button class="btn">Diagnosis Test</button>
-        <button class="btn">Drug/Medicine</button>
     </div>
 
-    <div class="section">
-        <h2>Prescription Info</h2>
-        <div class="form-group">
-            <label for="id">ID</label>
-            <input type="text" id="id" placeholder="Prescription ID">
-        </div>
-        <div class="form-group">
-            <label for="date">Date</label>
-            <input type="date" id="date">
-        </div>
-        <div class="form-group">
-            <label for="visit">Visit No</label>
-            <input type="number" id="visit" placeholder="Visit Number">
-        </div>
-        <div class="form-group">
-            <label for="problems">Patient Problems / Symptoms</label>
-            <textarea id="problems" rows="4" placeholder="Symptoms description"></textarea>
-        </div>
-        <div class="form-group">
-            <label for="medicine">Medicine</label>
-            <input type="text" id="medicine" placeholder="Select Medicine">
-        </div>
-        <div class="form-group">
-            <label for="test">Test</label>
-            <input type="text" id="test" placeholder="Select Diagnosis Test">
-        </div>
-    </div>
-</div>
-
-        
-    
     <footer>
         &copy; 2024 Vital Ridge. All Rights Reserved.
     </footer>
 </body>
-
 </html>

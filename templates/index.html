@@ -6,6 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Medical Report Analysis - Vital Ridge</title>
     <style>
+        :root {
+            --primary-color: #00509E;
+            --secondary-color: #4A90E2;
+            --accent-color: #E3F2FD;
+            --gradient-start: #f0f8ff;
+            --gradient-end: #e6f7ff;
+        }
+
         body {
             margin: 0;
             font-family: Arial, sans-serif;
@@ -38,21 +46,52 @@
         }
 
         .hero {
+            background: linear-gradient(135deg, var(--gradient-start) 0%, var(--gradient-end) 100%);
+            padding: 6rem 2rem;
             text-align: center;
-            padding: 60px 20px;
-            background: linear-gradient(to bottom, #f0f8ff, #e6f7ff);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('{{ url_for('static', filename='images/pattern.svg') }}') repeat;
+            opacity: 0.1;
+            z-index: 0;
+            animation: patternFloat 30s linear infinite;
+        }
+
+        @keyframes patternFloat {
+            0% { background-position: 0 0; }
+            100% { background-position: 100px 100px; }
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            margin: 0 auto;
         }
 
         .hero h2 {
-            font-size: 2.5em;
-            color: #00509E;
-            margin-bottom: 10px;
+            font-size: 3.5rem;
+            background: linear-gradient(120deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1.5rem;
+            animation: fadeInUp 0.8s ease-out;
         }
 
         .hero p {
-            font-size: 1.2em;
-            color: #666;
-            margin-bottom: 20px;
+            font-size: 1.4rem;
+            color: #555;
+            margin-bottom: 2rem;
+            animation: fadeInUp 0.8s ease-out 0.2s backwards;
         }
 
         .hero button {
@@ -70,37 +109,89 @@
         }
 
         .services {
-            padding: 40px 20px;
-            background-color: #f9f9f9;
-            text-align: center;
+            padding: 6rem 2rem;
+            background: #fff;
         }
 
         .services h2 {
-            font-size: 2em;
-            color: #00509E;
-            margin-bottom: 20px;
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 3rem;
         }
 
-        .services .cards {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 20px;
+        .cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
         }
 
-        .services .card {
-            background-color: #fff;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            width: 300px;
-            padding: 20px;
-            text-align: left;
+        .card {
+            position: relative;
+            background: #fff;
+            border-radius: 16px;
+            overflow: hidden;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+            display: block;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
         }
 
-        .services .card h3 {
-            font-size: 1.5em;
-            color: #00509E;
-            margin-bottom: 10px;
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(74, 144, 226, 0.1));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 20px rgba(0,0,0,0.15);
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card-content {
+            padding: 2rem;
+        }
+
+        .card h3 {
+            color: var(--primary-color);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+
+        .card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+
+        .card:hover h3::after {
+            width: 60px;
+        }
+
+        .card p {
+            color: #666;
+            line-height: 1.6;
         }
 
         footer {
@@ -116,13 +207,56 @@
             border-radius: 10px;
             margin-top: 20px;
         }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Card entrance animations */
+        .card {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .card:nth-child(1) { animation-delay: 0.2s; }
+        .card:nth-child(2) { animation-delay: 0.4s; }
+        .card:nth-child(3) { animation-delay: 0.6s; }
+        .card:nth-child(4) { animation-delay: 0.8s; }
+        .card:nth-child(5) { animation-delay: 1.0s; }
+        .card:nth-child(6) { animation-delay: 1.2s; }
+
+        /* Responsive adjustments */
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .cards {
+                grid-template-columns: 1fr;
+                padding: 1rem;
+            }
+
+            .card {
+                margin-bottom: 1rem;
+            }
+        }
     </style>
 </head>
 
 <body>
-    <header>
-        <a href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="Vital Ridge Logo" style="height: 50px;"></a>
-    </header>
+    {% include 'components/navbar.html' %}
 
     <section class="hero">
         <h2>One Stop Solution for all your Medical Needs</h2>
@@ -134,30 +268,47 @@
     <section class="services">
         <h2>Our Fields of Expertise</h2>
         <div class="cards">
-            <div class="card">
-                <h3><a href="/mr">Medical Report Analysis</a></h3>
-                <p>This is the space to introduce the Medical Report Analysis feature, describing its benefits and functionality.</p>
-            </div>
-            <div class="card">
-                <h3><a href="/pg">Prescription Generator</a></h3>
-                <p>This is the space to introduce the Prescription Generator, highlighting how it aids in personalized healthcare.</p>
-            </div>
-            <div class="card">
-                <h3><a href="/chatbot">Chat with Medical Intelligence (MI)</a></h3>
-                <p>This is the space to introduce the MI Chat feature, explaining its capabilities in guiding patients.</p>
-            </div>
-            <div class="card">
-                <h3><a href="/dc">Doctor Consult</a></h3>
-                <p>This is the space to introduce patients to a virtual consultancy platform with doctors available 24x7</p>
-            </div>
-            <div class="card">
-                <h3><a href="/dd">Drug Data Analysis</a></h3>
-                <p>This is the space to get information about the drugs and medicines by uploading its image.</p>
-            </div>
-            <div class="card">
-                <h3><a href="/vr">Vaccination Records</a></h3>
-                <p>This is the space where you can store,schedule and retrieve all your vaccination records since birth.</p>
-            </div>
+            <a href="/mr" class="card">
+                <div class="card-content">
+                    <h3>Medical Report Analysis</h3>
+                    <p>This is the space to introduce the Medical Report Analysis feature, describing its benefits and functionality.</p>
+                </div>
+            </a>
+
+            <a href="/pg" class="card">
+                <div class="card-content">
+                    <h3>Prescription Generator</h3>
+                    <p>This is the space to introduce the Prescription Generator, highlighting how it aids in personalized healthcare.</p>
+                </div>
+            </a>
+
+            <a href="/chatbot" class="card">
+                <div class="card-content">
+                    <h3>Chat with Medical Intelligence (MI)</h3>
+                    <p>This is the space to introduce the MI Chat feature, explaining its capabilities in guiding patients.</p>
+                </div>
+            </a>
+
+            <a href="/dc" class="card">
+                <div class="card-content">
+                    <h3>Doctor Consult</h3>
+                    <p>This is the space to introduce patients to a virtual consultancy platform with doctors available 24x7</p>
+                </div>
+            </a>
+
+            <a href="/dd" class="card">
+                <div class="card-content">
+                    <h3>Drug Data Analysis</h3>
+                    <p>This is the space to get information about the drugs and medicines by uploading its image.</p>
+                </div>
+            </a>
+
+            <a href="/vr" class="card">
+                <div class="card-content">
+                    <h3>Vaccination Records</h3>
+                    <p>This is the space where you can store, schedule and retrieve all your vaccination records since birth.</p>
+                </div>
+            </a>
         </div>
     </section>
 
