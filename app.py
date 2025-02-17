@@ -31,6 +31,13 @@ client = Groq(
     api_key="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"
 )
 
+# Add error handling for Tesseract
+try:
+    import pytesseract
+except Exception as e:
+    print(f"Warning: Tesseract import failed: {e}")
+    pytesseract = None
+
 def extract_text_from_pdf(pdf_path):
     """Extract text from a PDF file."""
     text = ""
@@ -47,7 +54,12 @@ def extract_text_from_pdf(pdf_path):
 def extract_text_from_image(image_path):
     """Extract text from an image file using OCR."""
     try:
+        if pytesseract is None:
+            raise Exception("Tesseract OCR is not properly installed")
+            
         image = Image.open(image_path)
+        # Explicitly set the Tesseract command path
+        pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
         text = pytesseract.image_to_string(image)
         return text.strip()
     except Exception as e:
