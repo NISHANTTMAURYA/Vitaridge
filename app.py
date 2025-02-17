@@ -268,7 +268,7 @@ def ping_server():
     while True:
         try:
             # Replace with your actual Render URL once deployed
-            response = requests.get('https://your-app-name.onrender.com/')
+            response = requests.get('https://vitaridge.onrender.com')
             print("Ping successful:", response.status_code)
         except Exception as e:
             print("Ping failed:", str(e))
