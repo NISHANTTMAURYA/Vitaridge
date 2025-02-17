@@ -7,6 +7,9 @@ import io
 from transformers import pipeline
 from groq import Groq
 import json
+import threading
+import time
+import requests
 
 app = Flask(__name__, static_url_path='/static')
 app.static_folder = 'static'
@@ -260,5 +263,23 @@ Remember: Always maintain a conversational flow while gathering necessary medica
 def chatbot():
     return render_template('chatbot.html')
 
+# Add this ping function
+def ping_server():
+    while True:
+        try:
+            # Replace with your actual Render URL once deployed
+            response = requests.get('https://your-app-name.onrender.com/')
+            print("Ping successful:", response.status_code)
+        except Exception as e:
+            print("Ping failed:", str(e))
+        time.sleep(300)  # 5 minutes
+
+# Start the ping thread when the app starts
+@app.before_first_request
+def start_ping():
+    ping_thread = threading.Thread(target=ping_server)
+    ping_thread.daemon = True  # This ensures the thread will stop when the app stops
+    ping_thread.start()
+
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 10000)))
