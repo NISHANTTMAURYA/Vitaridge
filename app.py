@@ -34,9 +34,10 @@ client = Groq(
 # Add error handling for Tesseract
 try:
     import pytesseract
+    TESSERACT_ENABLED = True
 except Exception as e:
     print(f"Warning: Tesseract import failed: {e}")
-    pytesseract = None
+    TESSERACT_ENABLED = False
 
 def extract_text_from_pdf(pdf_path):
     """Extract text from a PDF file."""
@@ -53,18 +54,16 @@ def extract_text_from_pdf(pdf_path):
 
 def extract_text_from_image(image_path):
     """Extract text from an image file using OCR."""
+    if not TESSERACT_ENABLED:
+        return "OCR is currently unavailable"
+        
     try:
-        if pytesseract is None:
-            raise Exception("Tesseract OCR is not properly installed")
-            
         image = Image.open(image_path)
-        # Explicitly set the Tesseract command path
-        pytesseract.pytesseract.tesseract_cmd = '/usr/bin/tesseract'
         text = pytesseract.image_to_string(image)
         return text.strip()
     except Exception as e:
         print("[ERROR] Extracting text from image:", str(e))
-        raise e
+        return "Error processing image"
 
 # Replace the existing summarizer pipeline with this function
 def generate_summary(text):
